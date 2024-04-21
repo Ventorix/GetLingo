@@ -1,3 +1,14 @@
+import { Button } from '@/components/ui/button';
+import {
+  ClerkLoaded,
+  ClerkLoading,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs';
+import { Loader } from 'lucide-react';
 import Image from 'next/image';
 
 export const Header = () => {
@@ -8,6 +19,36 @@ export const Header = () => {
           <Image src={'/mascot.svg'} alt='Mascot' height={48} width={48} />
           <h1 className='text-2xl font-extrabold tracking-widest text-green-600'>GetLingo</h1>
         </div>
+        <ClerkLoading>
+          <Loader className='h-5 w-5 animate-spin text-muted-foreground' />
+        </ClerkLoading>
+        <ClerkLoaded>
+          <SignedIn>
+            <UserButton afterSignOutUrl='/' />
+          </SignedIn>
+          <SignedOut>
+            <div className='flex gap-2'>
+              <SignInButton
+                mode='modal'
+                signUpFallbackRedirectUrl={'/learn'}
+                fallbackRedirectUrl={'/learn'}
+              >
+                <Button size={'lg'} variant={'ghost'}>
+                  Login
+                </Button>
+              </SignInButton>
+              <SignUpButton
+                mode='modal'
+                signInFallbackRedirectUrl={'/learn'}
+                fallbackRedirectUrl={'/learn'}
+              >
+                <Button size={'lg'} variant={'secondary'}>
+                  Sign Up
+                </Button>
+              </SignUpButton>
+            </div>
+          </SignedOut>
+        </ClerkLoaded>
       </div>
     </header>
   );
