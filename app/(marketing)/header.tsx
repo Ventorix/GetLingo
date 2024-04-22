@@ -19,13 +19,13 @@ export const Header = () => {
         <Link href={'/'}>
           <div className='flex items-center gap-x-3 pb-7 pl-4 pt-8'>
             <Image src={'/mascot.svg'} alt='Mascot' height={48} width={48} />
-            <h1 className='xs:block hidden text-2xl font-extrabold tracking-widest text-green-600'>
+            <h1 className='xs:block hidden text-2xl font-extrabold tracking-widest text-green-500'>
               GetLingo
             </h1>
           </div>
         </Link>
         <ClerkLoading>
-          <Loader className='h-5 w-5 animate-spin text-emerald-500' />
+          <Loader className='h-5 w-5 animate-spin text-green-500' />
         </ClerkLoading>
         <ClerkLoaded>
           <SignedIn>

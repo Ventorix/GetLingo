@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div>
       <div className='mx-auto flex w-full max-w-[988px] flex-1 flex-col items-center justify-center gap-2 p-4 lg:flex-row'>
-        <div className='relative mb-8 h-[240px] w-[240px] md:h-[424px] md:w-[424px] lg:mb-0'>
+        <div className='relative mb-8 aspect-[1/1] w-full max-w-[273px] leading-[0] md:h-[424px] md:max-w-none lg:mb-0'>
           <Image src={'/people.svg'} alt='People' fill />
         </div>
         <div className='flex flex-col items-center gap-y-8'>
