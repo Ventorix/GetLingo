@@ -17,11 +17,11 @@ export default async function LearnPage() {
   return (
     <div className='flex gap-[48px] px-6'>
       <FeedWrapper>
-        <Header title={'English'} />
+        <Header title={userProgress.activeCourse.title} />
       </FeedWrapper>
       <StickyWrapper>
         <UserProgress
-          activeCourse={{ title: 'English', imageSrc: '/flags/GB-UKM - United Kingdom.svg' }}
+          activeCourse={userProgress.activeCourse}
           hearts={userProgress?.hearts}
           points={userProgress?.points}
           hasActiveSubscription={false}

@@ -17,7 +17,7 @@ const Header = ({ title }: Props) => {
           <ArrowLeftIcon className='h-5 w-5 stroke-2 text-neutral-700' />
         </Button>
       </Link>
-      <h1 className='text-lg font-extrabold text-neutral-700'>{title}</h1>
+      <h1 className='text-lg font-extrabold'>{title}</h1>
       <div />
     </div>
   );
