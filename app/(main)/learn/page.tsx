@@ -1,9 +1,19 @@
 import FeedWrapper from '@/components/sidebar/feed-wrapper';
 import StickyWrapper from '@/components/sidebar/sticky-wrapper';
 import UserProgress from '@/components/user-progress';
+import { getUserProgress } from '@/db/queries';
+import { redirect } from 'next/navigation';
 import Header from './header';
 
-export default function LearnPage() {
+export default async function LearnPage() {
+  const userProgressData = getUserProgress();
+
+  const [userProgress] = await Promise.all([userProgressData]);
+
+  if (!userProgress || !userProgress.activeCourse) {
+    redirect('/courses');
+  }
+
   return (
     <div className='flex gap-[48px] px-6'>
       <FeedWrapper>
@@ -12,8 +22,8 @@ export default function LearnPage() {
       <StickyWrapper>
         <UserProgress
           activeCourse={{ title: 'English', imageSrc: '/flags/GB-UKM - United Kingdom.svg' }}
-          hearts={5}
-          points={100}
+          hearts={userProgress?.hearts}
+          points={userProgress?.points}
           hasActiveSubscription={false}
         />
       </StickyWrapper>
