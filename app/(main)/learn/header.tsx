@@ -14,10 +14,10 @@ const Header = ({ title }: Props) => {
     >
       <Link href={'/courses'}>
         <Button size={'sm'} variant={'ghost'}>
-          <ArrowLeftIcon className='h-5 w-5 stroke-2 text-sky-500' />
+          <ArrowLeftIcon className='h-5 w-5 stroke-2 text-neutral-700' />
         </Button>
       </Link>
-      <h1 className='text-lg font-bold text-sky-500'>{title}</h1>
+      <h1 className='text-lg font-extrabold text-neutral-700'>{title}</h1>
       <div />
     </div>
   );

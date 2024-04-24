@@ -21,13 +21,15 @@ export default function Home() {
         <div className='flex flex-col items-center gap-y-8'>
           <h1 className='max-w-[480px] text-center text-xl font-bold tracking-widest text-orange-400 lg:text-3xl'>
             <span className='text-sky-500'>Learn,</span>{' '}
-            <span className='text-indigo-500'>practice,</span>{' '}
-            <span className='text-rose-500'>master</span> new languages with{' '}
-            <span className='text-emerald-500'>GetLingo!</span>
+            <span className='text-indigo-500'>practice</span>{' '}
+            <span className='text-yellow-500'>and</span>{' '}
+            <span className='text-rose-500'>master</span> new languages{' '}
+            <span className='text-yellow-500'>with</span>{' '}
+            <span className='text-green-500'>GetLingo!</span>
           </h1>
           <div className='flex w-full max-w-[330px] flex-col items-center gap-y-3'>
             <ClerkLoading>
-              <Loader className='h-5 w-5 animate-spin text-emerald-500' />
+              <Loader className='h-5 w-5 animate-spin text-green-500' />
             </ClerkLoading>
             <ClerkLoaded>
               <SignedOut>
