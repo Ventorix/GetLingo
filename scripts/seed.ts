@@ -126,6 +126,14 @@ const main = async () => {
         correct: true,
         text: 'robot',
       },
+      {
+        id: 4,
+        challengeId: 1,
+        imageSrc: '/zombie.svg',
+        audioSrc: '',
+        correct: false,
+        text: 'zombie',
+      },
     ]);
 
     console.log('Seeding finished');
