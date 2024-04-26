@@ -34,6 +34,7 @@ const buttonVariants = cva(
       },
       size: {
         default: 'h-11 px-4 py-2',
+        xs: 'h-6 px-2',
         sm: 'h-9 px-3',
         lg: 'h-12 px-8',
         icon: 'h-10 w-10',
@@ -61,6 +62,42 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
 Button.displayName = 'Button';
 
-export { Button, buttonVariants };
+// Card
+
+const cardButtonVariant = cva(
+  'ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 tracking-wide',
+  {
+    variants: {
+      variant: {
+        default:
+          'relative bg-white shadow-[0_5px_0_#e2e8f0] text-black border-2 border-slate-200 active:shadow-none active:translate-y-[5px] hover:bg-slate-100 hover:text-slate-600',
+      },
+      size: {
+        default: 'h-11 px-4 py-2',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+);
+
+export interface CardButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof cardButtonVariant> {
+  asChild?: boolean;
+}
+
+const CardButton = React.forwardRef<HTMLButtonElement, CardButtonProps>(
+  ({ className, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : 'button';
+    return <Comp className={cn(cardButtonVariant({ className }))} ref={ref} {...props} />;
+  }
+);
+CardButton.displayName = 'CardButton';
+
+export { Button, CardButton, buttonVariants, cardButtonVariant };
