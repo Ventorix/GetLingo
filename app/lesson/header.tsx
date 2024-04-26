@@ -14,8 +14,8 @@ const Header = ({ hearts, percentage, hasActiveSubscription }: Props) => {
   const { open } = useExitModal();
 
   return (
-    <header className='mx-auto flex w-full max-w-[1140px] items-center justify-between gap-x-7 px-10 pt-[20px] lg:pt-[50px]'>
-      <Button onClick={open}>
+    <header className='mx-auto flex w-full max-w-[1140px] items-center justify-between gap-x-7 px-10 pt-[20px]  lg:pt-[50px]'>
+      <Button onClick={open} size={'sm'} className='xs:h-11 xs:px-4 xs:py-2'>
         <X className='h-6 w-6 text-slate-500' />
       </Button>
       <Progress value={percentage} />
