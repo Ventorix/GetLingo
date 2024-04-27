@@ -2,6 +2,8 @@ import { CardButton } from '@/components/ui/button';
 import { challenges } from '@/db/schema';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { useCallback } from 'react';
+import { useAudio, useKey } from 'react-use';
 
 type Props = {
   id: number;
@@ -28,6 +30,17 @@ const Card = ({
   disabled,
   type,
 }: Props) => {
+  const [audio, _, controls] = useAudio({ src: audioSrc || '' });
+
+  const handleClick = useCallback(() => {
+    if (disabled) return;
+
+    controls.play();
+    onClick();
+  }, [disabled, onClick, controls]);
+
+  useKey(shortcut, handleClick, {}, [handleClick]);
+
   return (
     <CardButton
       className={cn(
@@ -43,7 +56,7 @@ const Card = ({
         disabled && 'pointer-events-none hover:bg-white/50',
         type === 'ASSIST' && 'w-full lg:p-3'
       )}
-      onClick={() => {}}
+      onClick={handleClick}
     >
       <div
         className={cn(
@@ -55,7 +68,7 @@ const Card = ({
       >
         {shortcut}
       </div>
-
+      {audio}
       {imageSrc && (
         <div className='relative mb-4 aspect-square max-h-[80px] w-full lg:max-h-[150px]'>
           <Image src={imageSrc} alt={text} fill className='pointer-events-none' />
