@@ -9,8 +9,10 @@ type Props = {
   label: string;
   iconSrc: string;
   href: string;
+  onClick?: () => void;
 };
-const SidebarItem = ({ label, href, iconSrc }: Props) => {
+
+const SidebarItem = ({ label, href, iconSrc, onClick }: Props) => {
   const pathname = usePathname();
   const active = pathname === href;
 
@@ -21,7 +23,7 @@ const SidebarItem = ({ label, href, iconSrc }: Props) => {
       className='h-[52px] justify-start'
       asChild
     >
-      <Link href={href}>
+      <Link href={href} onClick={onClick}>
         <Image src={iconSrc} alt={label} className='mr-5' height={32} width={32} />
         {label}
       </Link>

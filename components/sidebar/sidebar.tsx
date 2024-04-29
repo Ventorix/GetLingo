@@ -1,3 +1,4 @@
+import { navbarLinks } from '@/config/navbar';
 import { cn } from '@/lib/utils';
 import { ClerkLoaded, ClerkLoading, UserButton } from '@clerk/nextjs';
 import { Loader } from 'lucide-react';
@@ -7,11 +8,12 @@ import SidebarItem from './sidebar-item';
 
 type Props = {
   className?: string;
+  close?: () => void;
 };
 
-const Sidebar = ({ className }: Props) => {
+const Sidebar = ({ className, close }: Props) => {
   return (
-    <div
+    <nav
       className={cn(
         'left-0 top-0 flex h-full flex-col border-r-2 px-4 lg:fixed lg:w-[256px]',
         className
@@ -24,20 +26,30 @@ const Sidebar = ({ className }: Props) => {
         </div>
       </Link>
       <div className='flex flex-1 flex-col gap-y-2'>
-        <SidebarItem label='Learn' href='/learn' iconSrc='/learn.svg' />
-        <SidebarItem label='Leaderboard' href='/leaderboard' iconSrc='/leaderboard.svg' />
-        <SidebarItem label='Quests' href='/quests' iconSrc='/quests.svg' />
-        <SidebarItem label='Shop' href='/shop' iconSrc='/shop.svg' />
+        {navbarLinks.map((item) => (
+          <SidebarItem
+            href={item.href}
+            iconSrc={item.iconSrc}
+            label={item.label}
+            key={item.id}
+            onClick={close}
+          />
+        ))}
       </div>
       <div className='p-4'>
         <ClerkLoading>
           <Loader className='h-5 w-5 animate-spin text-green-500' />
         </ClerkLoading>
         <ClerkLoaded>
-          <UserButton afterSignOutUrl='/' />
+          <UserButton
+            afterSignOutUrl='/'
+            appearance={{
+              elements: { userButtonPopoverCard: { pointerEvents: 'initial' } },
+            }}
+          />
         </ClerkLoaded>
       </div>
-    </div>
+    </nav>
   );
 };
 
