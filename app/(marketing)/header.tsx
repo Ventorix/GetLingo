@@ -19,7 +19,7 @@ export const Header = () => {
         <Link href={'/'}>
           <div className='flex items-center gap-x-3 pb-7 pl-4 pt-8'>
             <Image src={'/mascot.svg'} alt='Mascot' height={48} width={48} />
-            <h1 className='xs:block hidden text-2xl font-extrabold tracking-widest text-green-500'>
+            <h1 className='hidden text-2xl font-extrabold tracking-widest text-green-500 xs:block'>
               GetLingo
             </h1>
           </div>
@@ -29,7 +29,12 @@ export const Header = () => {
         </ClerkLoading>
         <ClerkLoaded>
           <SignedIn>
-            <UserButton afterSignOutUrl='/' />
+            <UserButton
+              afterSignOutUrl='/'
+              appearance={{
+                elements: { userButtonPopoverCard: { pointerEvents: 'initial' } },
+              }}
+            />
           </SignedIn>
           <SignedOut>
             <div className='flex gap-2'>

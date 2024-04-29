@@ -77,7 +77,7 @@ const Card = ({
 
       <div
         className={cn(
-          'p-y-2 flex items-center justify-center',
+          'flex items-center justify-center py-2',
           type === 'ASSIST' && 'flex-row-reverse'
         )}
       >

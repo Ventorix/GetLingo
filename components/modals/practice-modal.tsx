@@ -31,10 +31,9 @@ const PracticeModal = () => {
             <Image src={'/heart.svg'} alt='Heart' height={100} width={100} />
           </div>
           <DialogTitle className='text-center text-2xl font-bold'>Practice lesson</DialogTitle>
-          <DialogDescription className='text-center text-base'>
-            Use practice lessons to regain hearts and points.
-            <br />
-            While you train, your hearts won&apos;t go away!
+          <DialogDescription className='text-balance text-center text-base'>
+            Use practice lessons to regain hearts and points. While you train, your hearts
+            won&apos;t go away!
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className='mb-4'>
