@@ -2,7 +2,7 @@ type Props = {
   children: React.ReactNode;
 };
 const FeedWrapper = ({ children }: Props) => {
-  return <div className='relative top-0 flex-1 pb-10'>{children}</div>;
+  return <div className='flex max-w-2xl flex-grow flex-col'>{children}</div>;
 };
 
 export default FeedWrapper;

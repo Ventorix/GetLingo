@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { NotebookText } from 'lucide-react';
+import { NotebookTextIcon } from 'lucide-react';
 import Link from 'next/link';
 
 type Props = {
@@ -9,23 +9,24 @@ type Props = {
 
 const UnitBanner = ({ title, description }: Props) => {
   return (
-    <div className='flex w-full items-center justify-between rounded-xl bg-green-500 p-5 text-white'>
-      <div className='space-y-2.5'>
-        <h3 className='text-2xl font-bold'>{title}</h3>
-        <p className='text-lg'>{description}</p>
-      </div>
-
+    <article className='sticky top-14 z-50 flex min-h-[82px] max-w-2xl items-center justify-between rounded-xl bg-green-500 text-white lg:top-6'>
+      <header className='flex items-center justify-between gap-4 p-4'>
+        <div className='flex flex-col gap-1'>
+          <h2 className='text-2xl font-bold'>{title}</h2>
+          <p className='text-lg'>{description}</p>
+        </div>
+      </header>
       <Link href={'/lesson'}>
         <Button
           size={'lg'}
           variant={'secondary'}
-          className='ml-1 hidden border-2 border-b-4 active:border-transparent xs:flex'
+          className='mx-4 hidden border-2 border-b-4 active:border-transparent xs:flex'
         >
-          <NotebookText className='mr-2 h-5 w-5' />
+          <NotebookTextIcon className='mr-2 h-5 w-5' />
           Continue
         </Button>
       </Link>
-    </div>
+    </article>
   );
 };
 

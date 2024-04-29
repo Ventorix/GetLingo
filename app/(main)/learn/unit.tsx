@@ -30,7 +30,7 @@ const Unit = ({
   return (
     <>
       <UnitBanner title={title} description={description} />
-      <div className='relative flex flex-col items-center'>
+      <div className='relative mb-8 mt-12 flex flex-col items-center'>
         {lessons.map((lesson, index) => {
           const isCurrent = lesson.id === activeLesson?.id;
           const isLocked = !lesson.completed && !isCurrent;

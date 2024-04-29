@@ -99,11 +99,48 @@ const main = async () => {
         order: 1,
         question: 'Which one of this is the "man"?',
       },
+      {
+        id: 2,
+        lessonId: 1,
+        type: 'ASSIST',
+        order: 2,
+        question: 'the "woman"?',
+      },
+      {
+        id: 3,
+        lessonId: 1,
+        type: 'SELECT',
+        order: 3,
+        question: 'the "robot"?',
+      },
+    ]);
+
+    await db.insert(schema.challenges).values([
+      {
+        id: 4,
+        lessonId: 2,
+        type: 'SELECT',
+        order: 1,
+        question: 'Which one of this is the "man"?',
+      },
+      {
+        id: 5,
+        lessonId: 2,
+        type: 'ASSIST',
+        order: 2,
+        question: 'the "woman"?',
+      },
+      {
+        id: 6,
+        lessonId: 2,
+        type: 'SELECT',
+        order: 3,
+        question: 'the "robot"?',
+      },
     ]);
 
     await db.insert(schema.challengeOptions).values([
       {
-        id: 1,
         challengeId: 1,
         imageSrc: '/man.svg',
         audioSrc: '/audio/en_man.m4a',
@@ -111,7 +148,6 @@ const main = async () => {
         text: 'man',
       },
       {
-        id: 2,
         challengeId: 1,
         imageSrc: '/woman.svg',
         audioSrc: '/audio/en_woman.m4a',
@@ -119,16 +155,72 @@ const main = async () => {
         text: 'woman',
       },
       {
-        id: 3,
         challengeId: 1,
+        imageSrc: '/robot.svg',
+        audioSrc: '/audio/en_robot.m4a',
+        correct: false,
+        text: 'robot',
+      },
+      {
+        challengeId: 1,
+        imageSrc: '/zombie.svg',
+        audioSrc: '/audio/en_zombie.m4a',
+        correct: false,
+        text: 'zombie',
+      },
+    ]);
+
+    await db.insert(schema.challengeOptions).values([
+      {
+        challengeId: 2,
+        audioSrc: '/audio/en_man.m4a',
+        correct: false,
+        text: 'man',
+      },
+      {
+        challengeId: 2,
+        audioSrc: '/audio/en_woman.m4a',
+        correct: true,
+        text: 'woman',
+      },
+      {
+        challengeId: 2,
+        audioSrc: '/audio/en_robot.m4a',
+        correct: false,
+        text: 'robot',
+      },
+      {
+        challengeId: 2,
+        audioSrc: '/audio/en_zombie.m4a',
+        correct: false,
+        text: 'zombie',
+      },
+    ]);
+
+    await db.insert(schema.challengeOptions).values([
+      {
+        challengeId: 3,
+        imageSrc: '/man.svg',
+        audioSrc: '/audio/en_man.m4a',
+        correct: false,
+        text: 'man',
+      },
+      {
+        challengeId: 3,
+        imageSrc: '/woman.svg',
+        audioSrc: '/audio/en_woman.m4a',
+        correct: false,
+        text: 'woman',
+      },
+      {
+        challengeId: 3,
         imageSrc: '/robot.svg',
         audioSrc: '/audio/en_robot.m4a',
         correct: true,
         text: 'robot',
       },
       {
-        id: 4,
-        challengeId: 1,
+        challengeId: 3,
         imageSrc: '/zombie.svg',
         audioSrc: '/audio/en_zombie.m4a',
         correct: false,
