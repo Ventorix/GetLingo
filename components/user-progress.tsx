@@ -12,7 +12,7 @@ const UserProgress = async () => {
   }
 
   return (
-    <article className='flex justify-between gap-4'>
+    <article className='flex w-full items-center justify-between gap-x-2'>
       <div className='relative flex items-center rounded-xl hover:bg-gray-100'>
         <Button
           variant={'ghost'}
