@@ -12,227 +12,377 @@ const main = async () => {
   try {
     console.log('Seeding database');
 
-    await db.delete(schema.courses);
-    await db.delete(schema.userProgress);
-    await db.delete(schema.units);
-    await db.delete(schema.lessons);
-    await db.delete(schema.challenges);
-    await db.delete(schema.challengeOptions);
-    await db.delete(schema.challengeProgress);
-
-    await db.insert(schema.courses).values([
-      {
-        id: 1,
-        title: 'English',
-        imageSrc: '/flags/GB-UKM - United Kingdom.svg',
-      },
-      {
-        id: 2,
-        title: 'German',
-        imageSrc: '/flags/DE - Germany.svg',
-      },
-      {
-        id: 3,
-        title: 'French',
-        imageSrc: '/flags/FR - France.svg',
-      },
-      {
-        id: 4,
-        title: 'Spanish',
-        imageSrc: '/flags/ES - Spain.svg',
-      },
-      {
-        id: 5,
-        title: 'Japanese',
-        imageSrc: '/flags/JP - Japan.svg',
-      },
+    // Delete all existing data
+    await Promise.all([
+      db.delete(schema.userProgress),
+      db.delete(schema.challenges),
+      db.delete(schema.units),
+      db.delete(schema.lessons),
+      db.delete(schema.courses),
+      db.delete(schema.challengeOptions),
     ]);
 
-    await db.insert(schema.units).values([
-      {
-        id: 1,
-        courseId: 1,
-        title: 'Unit 1',
-        description: 'Learn the basics of English',
-        order: 1,
-      },
-    ]);
+    // Insert courses
+    const courses = await db
+      .insert(schema.courses)
+      .values([{ title: 'English', imageSrc: '/flags/GB-UKM - United Kingdom.svg' }])
+      .returning();
 
-    await db.insert(schema.lessons).values([
-      {
-        id: 1,
-        unitId: 1,
-        order: 1,
-        title: 'Nouns',
-      },
-      {
-        id: 2,
-        unitId: 1,
-        order: 2,
-        title: 'Verbs',
-      },
-      {
-        id: 3,
-        unitId: 1,
-        order: 3,
-        title: 'Nouns',
-      },
-      {
-        id: 4,
-        unitId: 1,
-        order: 4,
-        title: 'Verbs',
-      },
-      {
-        id: 5,
-        unitId: 1,
-        order: 5,
-        title: 'Nouns',
-      },
-    ]);
+    // For each course, insert units
+    for (const course of courses) {
+      const units = await db
+        .insert(schema.units)
+        .values([
+          {
+            courseId: course.id,
+            title: 'Unit 1',
+            description: `Learn the basics of ${course.title}`,
+            order: 1,
+          },
+          {
+            courseId: course.id,
+            title: 'Unit 2',
+            description: `Learn intermediate ${course.title}`,
+            order: 2,
+          },
+        ])
+        .returning();
 
-    await db.insert(schema.challenges).values([
-      {
-        id: 1,
-        lessonId: 1,
-        type: 'SELECT',
-        order: 1,
-        question: 'Which one of this is the "man"?',
-      },
-      {
-        id: 2,
-        lessonId: 1,
-        type: 'ASSIST',
-        order: 2,
-        question: 'the "woman"?',
-      },
-      {
-        id: 3,
-        lessonId: 1,
-        type: 'SELECT',
-        order: 3,
-        question: 'the "robot"?',
-      },
-    ]);
+      // For each unit, insert lessons
+      for (const unit of units) {
+        const lessons = await db
+          .insert(schema.lessons)
+          .values([
+            { unitId: unit.id, title: 'Nouns', order: 1 },
+            { unitId: unit.id, title: 'Verbs', order: 2 },
+            { unitId: unit.id, title: 'Adjectives', order: 3 },
+            { unitId: unit.id, title: 'Phrases', order: 4 },
+            { unitId: unit.id, title: 'Sentences', order: 5 },
+          ])
+          .returning();
 
-    await db.insert(schema.challenges).values([
-      {
-        id: 4,
-        lessonId: 2,
-        type: 'SELECT',
-        order: 1,
-        question: 'Which one of this is the "man"?',
-      },
-      {
-        id: 5,
-        lessonId: 2,
-        type: 'ASSIST',
-        order: 2,
-        question: 'the "woman"?',
-      },
-      {
-        id: 6,
-        lessonId: 2,
-        type: 'SELECT',
-        order: 3,
-        question: 'the "robot"?',
-      },
-    ]);
+        // For each lesson, insert challenges
+        for (const lesson of lessons) {
+          const challenges = await db
+            .insert(schema.challenges)
+            .values([
+              {
+                lessonId: lesson.id,
+                type: 'SELECT',
+                question: 'Which one of these is "the man"?',
+                order: 1,
+              },
+              {
+                lessonId: lesson.id,
+                type: 'SELECT',
+                question: 'Which one of these is "the woman"?',
+                order: 2,
+              },
+              {
+                lessonId: lesson.id,
+                type: 'SELECT',
+                question: 'Which one of these is "the boy"?',
+                order: 3,
+              },
+              {
+                lessonId: lesson.id,
+                type: 'ASSIST',
+                question: '"the man"',
+                order: 4,
+              },
+              {
+                lessonId: lesson.id,
+                type: 'SELECT',
+                question: 'Which one of these is "the zombie"?',
+                order: 5,
+              },
+              {
+                lessonId: lesson.id,
+                type: 'SELECT',
+                question: 'Which one of these is "the robot"?',
+                order: 6,
+              },
+              {
+                lessonId: lesson.id,
+                type: 'SELECT',
+                question: 'Which one of these is "the girl"?',
+                order: 7,
+              },
+              {
+                lessonId: lesson.id,
+                type: 'ASSIST',
+                question: '"the zombie"',
+                order: 8,
+              },
+            ])
+            .returning();
 
-    await db.insert(schema.challengeOptions).values([
-      {
-        challengeId: 1,
-        imageSrc: '/man.svg',
-        audioSrc: '/audio/en_man.m4a',
-        correct: true,
-        text: 'man',
-      },
-      {
-        challengeId: 1,
-        imageSrc: '/woman.svg',
-        audioSrc: '/audio/en_woman.m4a',
-        correct: false,
-        text: 'woman',
-      },
-      {
-        challengeId: 1,
-        imageSrc: '/robot.svg',
-        audioSrc: '/audio/en_robot.m4a',
-        correct: false,
-        text: 'robot',
-      },
-      {
-        challengeId: 1,
-        imageSrc: '/zombie.svg',
-        audioSrc: '/audio/en_zombie.m4a',
-        correct: false,
-        text: 'zombie',
-      },
-    ]);
+          // For each challenge, insert challenge options
+          for (const challenge of challenges) {
+            if (challenge.order === 1) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'man',
+                  imageSrc: '/man.svg',
+                  audioSrc: '/audio/en_man.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'woman',
+                  imageSrc: '/woman.svg',
+                  audioSrc: '/audio/woman.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'boy',
+                  imageSrc: '/boy.svg',
+                  audioSrc: '/audio/en_boy.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'zombie',
+                  imageSrc: '/zombie.svg',
+                  audioSrc: '/audio/en_zombie.m4a',
+                },
+              ]);
+            }
 
-    await db.insert(schema.challengeOptions).values([
-      {
-        challengeId: 2,
-        audioSrc: '/audio/en_man.m4a',
-        correct: false,
-        text: 'man',
-      },
-      {
-        challengeId: 2,
-        audioSrc: '/audio/en_woman.m4a',
-        correct: true,
-        text: 'woman',
-      },
-      {
-        challengeId: 2,
-        audioSrc: '/audio/en_robot.m4a',
-        correct: false,
-        text: 'robot',
-      },
-      {
-        challengeId: 2,
-        audioSrc: '/audio/en_zombie.m4a',
-        correct: false,
-        text: 'zombie',
-      },
-    ]);
+            if (challenge.order === 2) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'woman',
+                  imageSrc: '/woman.svg',
+                  audioSrc: '/audio/en_woman.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'boy',
+                  imageSrc: '/boy.svg',
+                  audioSrc: '/audio/en_boy.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'man',
+                  imageSrc: '/man.svg',
+                  audioSrc: '/audio/en_man.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  text: 'robot',
+                  correct: false,
+                  imageSrc: '/robot.svg',
+                  audioSrc: '/audio/en_robot.m4a',
+                },
+              ]);
+            }
 
-    await db.insert(schema.challengeOptions).values([
-      {
-        challengeId: 3,
-        imageSrc: '/man.svg',
-        audioSrc: '/audio/en_man.m4a',
-        correct: false,
-        text: 'man',
-      },
-      {
-        challengeId: 3,
-        imageSrc: '/woman.svg',
-        audioSrc: '/audio/en_woman.m4a',
-        correct: false,
-        text: 'woman',
-      },
-      {
-        challengeId: 3,
-        imageSrc: '/robot.svg',
-        audioSrc: '/audio/en_robot.m4a',
-        correct: true,
-        text: 'robot',
-      },
-      {
-        challengeId: 3,
-        imageSrc: '/zombie.svg',
-        audioSrc: '/audio/en_zombie.m4a',
-        correct: false,
-        text: 'zombie',
-      },
-    ]);
+            if (challenge.order === 3) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'woman',
+                  imageSrc: '/woman.svg',
+                  audioSrc: '/audio/en_woman.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'man',
+                  imageSrc: '/man.svg',
+                  audioSrc: '/audio/en_man.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'boy',
+                  imageSrc: '/boy.svg',
+                  audioSrc: '/audio/en_boy.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'girl',
+                  imageSrc: '/girl.svg',
+                  audioSrc: '/audio/en_girl.m4a',
+                },
+              ]);
+            }
 
-    console.log('Seeding finished');
+            if (challenge.order === 4) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'woman',
+                  audioSrc: '/audio/en_woman.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'man',
+                  audioSrc: '/audio/en_man.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'boy',
+                  audioSrc: '/audio/en_boy.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'girl',
+                  audioSrc: '/audio/en_girl.m4a',
+                },
+              ]);
+            }
+
+            if (challenge.order === 5) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'man',
+                  imageSrc: '/man.svg',
+                  audioSrc: '/audio/en_man.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'woman',
+                  imageSrc: '/woman.svg',
+                  audioSrc: '/audio/en_woman.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'zombie',
+                  imageSrc: '/zombie.svg',
+                  audioSrc: '/audio/en_zombie.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  text: 'robot',
+                  correct: false,
+                  imageSrc: '/robot.svg',
+                  audioSrc: '/audio/en_robot.m4a',
+                },
+              ]);
+            }
+
+            if (challenge.order === 6) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'robot',
+                  imageSrc: '/robot.svg',
+                  audioSrc: '/audio/en_robot.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'zombie',
+                  imageSrc: '/zombie.svg',
+                  audioSrc: '/audio/en_zombie.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'boy',
+                  imageSrc: '/boy.svg',
+                  audioSrc: '/audio/en_boy.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'girl',
+                  imageSrc: '/girl.svg',
+                  audioSrc: '/audio/en_girl.m4a',
+                },
+              ]);
+            }
+
+            if (challenge.order === 7) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'girl',
+                  imageSrc: '/girl.svg',
+                  audioSrc: '/audio/en_girl.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'zombie',
+                  imageSrc: '/zombie.svg',
+                  audioSrc: '/audio/en_zombie.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'man',
+                  imageSrc: '/man.svg',
+                  audioSrc: '/audio/en_man.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'woman',
+                  imageSrc: '/woman.svg',
+                  audioSrc: '/audio/en_woman.m4a',
+                },
+              ]);
+            }
+
+            if (challenge.order === 8) {
+              await db.insert(schema.challengeOptions).values([
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'woman',
+                  audioSrc: '/audio/en_woman.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: true,
+                  text: 'zombie',
+                  audioSrc: '/audio/en_zombie.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'boy',
+                  audioSrc: '/audio/en_boy.m4a',
+                },
+                {
+                  challengeId: challenge.id,
+                  correct: false,
+                  text: 'robot',
+                  audioSrc: '/audio/en_robot.m4a',
+                },
+              ]);
+            }
+          }
+        }
+      }
+    }
+    console.log('Database seeded successfully');
   } catch (error) {
     console.error(error);
     throw new Error('Failed to seed the database');
   }
 };
 
-main();
+void main();
