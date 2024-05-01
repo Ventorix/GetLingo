@@ -2,24 +2,23 @@
 
 import { refillHearts } from '@/actions/refill-hearts';
 import { Button } from '@/components/ui/button';
-import { DEFAULT_HEARTS_VALUE, POINTS_PER_REFILL_HEARTS } from '@/constants';
+import { DEFAULT_HEARTS_VALUE, DIAMONDS_PER_REFILL_HEARTS } from '@/constants';
 import Image from 'next/image';
 import { useTransition } from 'react';
 import { toast } from 'sonner';
 
 type Props = {
   hearts: number;
-  points: number;
-  hasActiveSubscription: boolean;
+  diamonds: number;
 };
 
-const Items = ({ hearts, points, hasActiveSubscription }: Props) => {
+const Items = ({ hearts, diamonds }: Props) => {
   const isHeartsFull = hearts === DEFAULT_HEARTS_VALUE;
 
   const [pending, startTransition] = useTransition();
 
   const onRefillHearts = () => {
-    if (pending || hearts === DEFAULT_HEARTS_VALUE || points < POINTS_PER_REFILL_HEARTS) return;
+    if (pending || hearts === DEFAULT_HEARTS_VALUE || diamonds < DIAMONDS_PER_REFILL_HEARTS) return;
 
     startTransition(() => {
       refillHearts().catch(() => toast.error('Something went wrong'));
@@ -34,14 +33,14 @@ const Items = ({ hearts, points, hasActiveSubscription }: Props) => {
         </div>
         <Button
           onClick={onRefillHearts}
-          disabled={pending || isHeartsFull || points < POINTS_PER_REFILL_HEARTS}
+          disabled={pending || isHeartsFull || diamonds < DIAMONDS_PER_REFILL_HEARTS}
         >
           {isHeartsFull ? (
             'full'
           ) : (
             <div className='flex items-center'>
-              <Image src={'/points.svg'} alt='Points' height={20} width={20} />
-              <p>{POINTS_PER_REFILL_HEARTS}</p>
+              <Image src={'/diamond.svg'} alt='Diamond' height={20} width={20} />
+              <p>{DIAMONDS_PER_REFILL_HEARTS}</p>
             </div>
           )}
         </Button>

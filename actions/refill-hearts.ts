@@ -1,6 +1,6 @@
 'use server';
 
-import { DEFAULT_HEARTS_VALUE, POINTS_PER_REFILL_HEARTS } from '@/constants';
+import { DEFAULT_HEARTS_VALUE, DIAMONDS_PER_REFILL_HEARTS } from '@/constants';
 import db from '@/db/drizzle';
 import { getUserProgress } from '@/db/queries';
 import { userProgress } from '@/db/schema';
@@ -18,15 +18,15 @@ export const refillHearts = async () => {
     throw new Error('Hearts are already full');
   }
 
-  if (currentUserProgress.points < POINTS_PER_REFILL_HEARTS) {
-    throw new Error('Not enough points');
+  if (currentUserProgress.points < DIAMONDS_PER_REFILL_HEARTS) {
+    throw new Error('Not enough diamonds');
   }
 
   await db
     .update(userProgress)
     .set({
       hearts: DEFAULT_HEARTS_VALUE,
-      points: currentUserProgress.points - POINTS_PER_REFILL_HEARTS,
+      diamonds: currentUserProgress.diamonds - DIAMONDS_PER_REFILL_HEARTS,
     })
     .where(eq(userProgress.userId, currentUserProgress.userId));
 

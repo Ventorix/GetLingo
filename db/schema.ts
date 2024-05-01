@@ -1,3 +1,4 @@
+import { DEFAULT_HEARTS_VALUE } from '@/constants';
 import { relations } from 'drizzle-orm';
 import { boolean, integer, pgEnum, pgTable, serial, text } from 'drizzle-orm/pg-core';
 
@@ -107,8 +108,9 @@ export const userProgress = pgTable('user_progress', {
   userName: text('user_name').notNull().default('User'),
   userImageSrc: text('user_image_src').notNull().default('/user.svg'),
   activeCourseId: integer('active_course_id').references(() => courses.id, { onDelete: 'cascade' }),
-  hearts: integer('hearts').notNull().default(5),
+  hearts: integer('hearts').notNull().default(DEFAULT_HEARTS_VALUE),
   points: integer('points').notNull().default(0),
+  diamonds: integer('diamonds').notNull().default(100),
 });
 
 export const userRelations = relations(userProgress, ({ one }) => ({

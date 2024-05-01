@@ -19,11 +19,7 @@ const ShopPage = async () => {
         <p className='mb-6 text-center text-lg text-muted-foreground'>
           There you can spend your points
         </p>
-        <Items
-          hearts={userProgress?.hearts}
-          points={userProgress?.points}
-          hasActiveSubscription={false}
-        />
+        <Items hearts={userProgress?.hearts} diamonds={userProgress?.diamonds} />
       </div>
     </FeedWrapper>
   );
