@@ -12,7 +12,7 @@
     "db:seed": "tsx ./scripts/seed.ts"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.0.1",
+    "@clerk/nextjs": "^5.0.3",
     "@neondatabase/serverless": "^0.9.1",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.0.5",
