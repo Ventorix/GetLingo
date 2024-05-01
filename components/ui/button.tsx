@@ -5,32 +5,34 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 uppercase tracking-wide',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-xl text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 tracking-wide',
   {
     variants: {
       variant: {
         default:
-          'bg-white shadow-[0_5px_0_#e2e8f0] text-black border-2 border-slate-200 transition active:shadow-none active:translate-y-[5px] hover:bg-slate-100 hover:text-slate-600',
+          'bg-white uppercase shadow-[0_5px_0_#e2e8f0] text-black border-2 border-slate-200 transition active:shadow-none active:translate-y-[5px] hover:bg-slate-100 hover:text-slate-600',
         primary:
-          'bg-sky-400 shadow-[0_5px_0_#0ea5e9] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-sky-400/90',
-        primaryOutline: 'bg-white text-sky-500 transition hover:bg-slate-100',
+          'bg-sky-400 uppercase shadow-[0_5px_0_#0ea5e9] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-sky-400/90',
+        primaryOutline: 'bg-white uppercase text-sky-500 transition hover:bg-slate-100',
         secondary:
-          'bg-green-500 shadow-[0_5px_0_#16a34a] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-green-500/90',
-        secondaryOutline: 'bg-white text-green-500 transition hover:bg-slate-100',
+          'bg-green-500 uppercase shadow-[0_5px_0_#16a34a] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-green-500/90',
+        secondaryOutline: 'bg-white uppercase text-green-500 transition hover:bg-slate-100',
         danger:
-          'bg-rose-500 shadow-[0_5px_0_#e11d48] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-rose-500/90',
-        dangerOutline: 'bg-white text-rose-500 transition hover:bg-slate-100',
+          'bg-rose-500 uppercase shadow-[0_5px_0_#e11d48] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-rose-500/90',
+        dangerOutline: 'bg-white uppercase text-rose-500 transition hover:bg-slate-100',
         super:
-          'bg-indigo-500 shadow-[0_5px_0_#4f46e5] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-indigo-500/90',
-        superOutline: 'bg-white text-indigo-500 transition hover:bg-slate-100',
+          'bg-indigo-500 uppercase shadow-[0_5px_0_#4f46e5] text-primary-foreground transition active:shadow-none active:translate-y-[5px] hover:bg-indigo-500/90',
+        superOutline: 'bg-white uppercase text-indigo-500 transition hover:bg-slate-100',
         ghost:
+          'bg-transparent uppercase text-slate-500 border-transparent border-0 transition hover:bg-slate-100',
+        popover:
           'bg-transparent text-slate-500 border-transparent border-0 transition hover:bg-slate-100',
         sidebar:
-          'bg-transparent text-slate-500 border-2 border-transparent transition-none hover:bg-slate-100',
+          'bg-transparent uppercase text-slate-500 border-2 border-transparent transition-none hover:bg-slate-100',
         sidebarOutline:
-          'bg-sky-500/15 text-sky-500 border-sky-300 border-2 transition-none hover:bg-sky-500/20',
+          'bg-sky-500/15 uppercase text-sky-500 border-sky-300 border-2 transition-none hover:bg-sky-500/20',
         locked:
-          'bg-neutral-200 text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-0',
+          'bg-neutral-200 uppercase text-primary-foreground hover:bg-neutral-200/90 border-neutral-400 border-b-4 active:border-b-0',
       },
       size: {
         default: 'h-11 px-4 py-2',

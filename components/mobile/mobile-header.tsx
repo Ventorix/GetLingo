@@ -1,4 +1,4 @@
-import UserProgress from '../user-progress';
+import UserProgress from '../user/user-progress';
 import MobileSidebar from './mobile-sidebar';
 
 const MobileHeader = async () => {

@@ -40,7 +40,7 @@ const Items = ({ hearts, diamonds }: Props) => {
           ) : (
             <div className='flex items-center'>
               <Image src={'/diamond.svg'} alt='Diamond' height={20} width={20} />
-              <p>{DIAMONDS_PER_REFILL_HEARTS}</p>
+              <p className='ml-2 text-blue-500'>{DIAMONDS_PER_REFILL_HEARTS}</p>
             </div>
           )}
         </Button>
