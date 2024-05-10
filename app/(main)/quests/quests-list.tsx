@@ -1,5 +1,5 @@
 import { Progress } from '@/components/ui/progress';
-import { quests } from '@/config/quests';
+import { quests } from '@/config/quests_template';
 import { getUserProgress } from '@/db/queries';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
@@ -15,7 +15,10 @@ const QuestsList = async () => {
     <ul className='w-full'>
       {quests.map((quest) => {
         const progress = (userProgress.points / quest.value) * 100;
-        console.log(progress);
+
+        if (progress >= quest.value && !quest.done) {
+          quest.done = true;
+        }
 
         return (
           <div className='flex w-full items-center gap-x-4 border-t-2 p-4' key={quest.title}>
@@ -25,8 +28,8 @@ const QuestsList = async () => {
               <Progress value={progress} className='h-3' />
             </div>
             <Image
-              src={progress >= 100 ? '/unlocked-chest.svg' : '/locked-chest.svg'}
-              alt={progress >= 100 ? 'Unlocked chest' : 'Locked chest'}
+              src={quest.done ? '/unlocked-chest.svg' : '/locked-chest.svg'}
+              alt={quest.done ? 'Unlocked chest' : 'Locked chest'}
               className='mt-4'
               width={44}
               height={44}
