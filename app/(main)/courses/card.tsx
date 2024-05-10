@@ -16,7 +16,7 @@ export const Card = ({ title, id, imageSrc, onClick, disabled, active }: Props) 
     <div
       onClick={() => onClick(id)}
       className={cn(
-        'flex h-full min-h-[217px] min-w-[200px] cursor-pointer flex-col items-center justify-between rounded-xl border-2 border-slate-200 bg-white p-3 pb-6 shadow-[0_5px_0_#e2e8f0] transition hover:bg-slate-50 active:translate-y-[5px] active:shadow-none',
+        'flex h-full min-h-[167px] min-w-[140px] cursor-pointer flex-col items-center justify-between rounded-xl border-2 border-slate-200 bg-white p-3 pb-6 shadow-[0_5px_0_#e2e8f0] transition hover:bg-slate-50 active:translate-y-[5px] active:shadow-none lg:min-h-[210px] lg:min-w-[190px]',
         disabled && 'pointer-events-none opacity-50'
       )}
     >

@@ -37,7 +37,7 @@ export const List = ({ courses, activeCourseId }: Props) => {
           title={course.title}
           imageSrc={course.imageSrc}
           onClick={onClick}
-          disabled={pending}
+          disabled={pending || course.title !== 'English'} //TODO: Make course under development check
           active={course.id === activeCourseId}
         />
       ))}

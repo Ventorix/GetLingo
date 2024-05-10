@@ -6,13 +6,13 @@ type Props = {
   children: React.ReactNode;
 };
 
-const MainLayout = async ({ children }: Props) => {
+const MainLayout = ({ children }: Props) => {
   return (
     <>
       <MobileHeader />
       <Sidebar className='hidden lg:flex' />
       <main className='h-full pt-[50px] lg:pl-[256px] lg:pt-0'>
-        <div className='max-width-[1056px] flex justify-center gap-3 p-6 sm:pt-10 md:ml-24 lg:ml-0 lg:gap-12'>
+        <div className='max-width-[1056px] flex justify-center gap-3 p-6 sm:pt-10 lg:ml-0 lg:gap-12'>
           {children}
           <RightBar />
         </div>
