@@ -2,6 +2,9 @@
 
 import simpleRestProvider from 'ra-data-simple-rest';
 import { Admin, Resource } from 'react-admin';
+import ChallengeCreate from './challenge/create';
+import ChallengeEdit from './challenge/edit';
+import ChallengeList from './challenge/list';
 import CourseCreate from './course/create';
 import CourseEdit from './course/edit';
 import CourseList from './course/list';
@@ -37,6 +40,13 @@ const App = () => {
         list={LessonList}
         create={LessonCreate}
         edit={LessonEdit}
+      />
+      <Resource
+        name='challenges'
+        recordRepresentation={'title'}
+        list={ChallengeList}
+        create={ChallengeCreate}
+        edit={ChallengeEdit}
       />
     </Admin>
   );
