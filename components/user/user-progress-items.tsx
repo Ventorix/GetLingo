@@ -39,7 +39,7 @@ const UserProgressItems = ({ userProgress, activeCourse }: Props) => {
           <Image
             src={activeCourse?.imageSrc!}
             alt={activeCourse?.title!}
-            className='rounded-md border-2 border-white'
+            className='min-w-8 rounded-md border-2 border-white'
             width={32}
             height={32}
           />
