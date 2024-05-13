@@ -46,6 +46,8 @@ const UserProgressItems = ({ userProgress, activeCourse }: Props) => {
         </Button>
 
         <div
+          role='tooltip'
+          aria-label='Country tooltip'
           className={cn(
             'absolute left-[calc(50%-60px)] top-[100%] z-10 hidden w-72 items-center gap-3 rounded-2xl border-2 border-gray-300 bg-white p-3',
             isOpenFlag ? 'block' : 'hidden'
@@ -89,6 +91,8 @@ const UserProgressItems = ({ userProgress, activeCourse }: Props) => {
         <span className='text-sm font-extrabold'>{userProgress?.points}</span>
 
         <div
+          role='tooltip'
+          aria-label='Points tooltip'
           className={cn(
             'absolute left-[calc(50%-100px)] top-[100%] z-10 hidden w-72 items-center gap-3 rounded-2xl border-2 border-gray-300 bg-white p-5',
             isOpenPoints ? 'flex' : 'hidden'
@@ -104,6 +108,7 @@ const UserProgressItems = ({ userProgress, activeCourse }: Props) => {
 
       {/* Diamonds */}
       <Button
+        aria-label='Di'
         variant={'popover'}
         size={'default'}
         className='relative flex cursor-default items-center rounded-xl text-white hover:bg-gray-100 lg:text-blue-500'
@@ -115,6 +120,8 @@ const UserProgressItems = ({ userProgress, activeCourse }: Props) => {
         <span className='text-sm font-extrabold'>{userProgress?.diamonds}</span>
 
         <div
+          role='tooltip'
+          aria-label='Diamonds tooltip'
           className={cn(
             'absolute left-[calc(50%-180px)] top-[100%] z-10 hidden w-72 items-center gap-3 rounded-2xl border-2 border-gray-300 bg-white p-5',
             isOpenDiamonds ? 'flex' : 'hidden'
@@ -148,6 +155,8 @@ const UserProgressItems = ({ userProgress, activeCourse }: Props) => {
         <span className='text-sm font-extrabold'>{userProgress?.hearts}</span>
 
         <div
+          role='tooltip'
+          aria-label='Hearts tooltip'
           className={cn(
             'absolute left-[calc(50%-250px)] top-full z-10 hidden w-72 items-center gap-3 rounded-2xl border-2 border-gray-300 bg-white p-5',
             isOpenHearts ? 'flex' : 'hidden'

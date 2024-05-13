@@ -44,7 +44,12 @@ const LessonButton = ({ id, index, totalCount, locked, current, percentage }: Pr
   const href = isCompleted ? `/lesson/${id}` : '/lesson';
 
   return (
-    <Link href={href} aria-disabled={locked} style={{ pointerEvents: locked ? 'none' : 'auto' }}>
+    <Link
+      aria-label='Start lesson'
+      href={href}
+      aria-disabled={locked}
+      style={{ pointerEvents: locked ? 'none' : 'auto' }}
+    >
       <div
         className='relative'
         style={{ right: `${rightPosition}px`, marginTop: isFirst && !isCompleted ? 60 : 24 }}
@@ -56,6 +61,7 @@ const LessonButton = ({ id, index, totalCount, locked, current, percentage }: Pr
               <div className='absolute -bottom-2 left-1/2 h-0 w-0 -translate-x-1/2 transform border-x-8 border-t-8 border-x-transparent' />
             </div>
             <CircularProgressbarWithChildren
+              aria-label={`Complete percantage of lesson: ${Number.isNaN(percentage) ? 0 : percentage}%`}
               value={Number.isNaN(percentage) ? 0 : percentage}
               styles={{
                 path: {
@@ -67,6 +73,7 @@ const LessonButton = ({ id, index, totalCount, locked, current, percentage }: Pr
               }}
             >
               <Button
+                aria-label='Current lesson'
                 size={'rounded'}
                 variant={locked ? 'locked' : 'secondary'}
                 className='h-[70px] w-[70px] border-b-8 border-slate-200 active:border-transparent'
@@ -85,6 +92,7 @@ const LessonButton = ({ id, index, totalCount, locked, current, percentage }: Pr
           </div>
         ) : (
           <Button
+            aria-label='Lesson'
             size={'rounded'}
             variant={locked ? 'locked' : 'secondary'}
             className='h-[70px] w-[70px] border-b-8'

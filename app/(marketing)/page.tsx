@@ -16,7 +16,7 @@ export default function Home() {
     <div>
       <div className='mx-auto flex w-full max-w-[988px] flex-1 flex-col items-center justify-center gap-2 p-4 lg:flex-row'>
         <div className='relative mb-8 aspect-[1/1] w-full max-w-[273px] leading-[0] md:h-[424px] md:max-w-none lg:mb-0'>
-          <Image src={'/people.svg'} alt='People' fill />
+          <Image loading='eager' src={'/people.svg'} alt='People' fill />
         </div>
         <div className='flex flex-col items-center gap-y-8'>
           <h1 className='max-w-[480px] text-center text-xl font-bold tracking-widest text-orange-400 lg:text-3xl'>
