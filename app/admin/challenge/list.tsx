@@ -4,7 +4,7 @@ const ChallengeList = () => {
   return (
     <List>
       <Datagrid rowClick='edit'>
-        <TextField source='id' />
+        <NumberField source='id' />
         <TextField source='question' />
         <SelectField
           source='type'
